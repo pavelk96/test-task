@@ -1,8 +1,9 @@
 import { Layout } from 'antd';
-
 import React from "react";
 import LeftMenu from "../left-menu";
-
+import {Route} from "react-router-dom";
+import TemperaturePage from "../pages/temperatures-page";
+import UsersPage from "../pages/users-page";
 const { Header, Content, Footer } = Layout;
 
 
@@ -16,8 +17,10 @@ class App extends React.Component {
                 <LeftMenu/>
                 <Layout className="site-layout">
                     <Header className="site-layout-background" style={{ padding: 0 }} />
-                    <Content style={{ margin: '0 16px' }}>
-
+                    <Content className="content1">
+                        <Route path="/temperatures-page" component={TemperaturePage}/>
+                        <Route path="/users-page" component={UsersPage}/>
+                        1321
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
