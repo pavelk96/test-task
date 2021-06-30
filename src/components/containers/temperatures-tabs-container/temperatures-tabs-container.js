@@ -1,7 +1,8 @@
-import React,{Component} from 'react';
 import "./temperatures-tabs-container.css";
-import {connect} from "react-redux";
 import OneList from "../one-list";
+import React,{Component} from 'react';
+import {connect} from "react-redux";
+import {Divider} from "antd";
 
 
 class TemperatureTabsContainer extends Component{
@@ -18,9 +19,12 @@ class TemperatureTabsContainer extends Component{
                     <th>Actions</th>
                 </tr>
                 {temperatures.map((data, idx) => {return(
-                    <tr className="blocks">
-                        <OneList arg1={data.id} arg2={data.degree} key={idx}/>
-                    </tr>
+                    <React.Fragment key={idx}>
+                        <tr className="blocks">
+                            <OneList arg1={data.id} arg2={data.degree}  index={idx} method={"temperatures"}/>
+                        </tr>
+                        <Divider/>
+                    </React.Fragment>
                 )})}
                 </tbody>
             </table>

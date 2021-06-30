@@ -23,3 +23,7 @@
 input:focus{
     outline: none;
 }
+
+.btn{
+    background-color: rgb(240, 242, 245);
+}

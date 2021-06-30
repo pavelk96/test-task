@@ -1,5 +1,5 @@
 const initialState = {
-    isAuthenticated: false,
+    isAuthenticated: true,
     temperatures: [
         {id: "test", degree: "temp"},
         {id: "test2", degree: "temp2"}
@@ -14,7 +14,20 @@ const reducer = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case `LOGOUT_USER`:
+        case `DELETE_LINE`:
+            if (action.method === "temperatures") {
+                const newArr = [
+                    ...state.temperatures.slice(0, action.payload),
+                    ...state.temperatures.slice(action.payload + 1)
+                ]
+                return {...state, temperatures: newArr}
+            } else if (action.method === "users") {
+                const newArr = [
+                    ...state.users.slice(0, action.payload),
+                    ...state.users.slice(action.payload + 1)
+                ]
+                return {...state, users: newArr}
+            }
             return state;
 
         default:

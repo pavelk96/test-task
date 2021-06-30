@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import UserTabsContainer from "../containers/users-tabs";
+import UserTabsContainer from "../containers/users-tabs-container";
 
 
 class UsersPage extends Component{
