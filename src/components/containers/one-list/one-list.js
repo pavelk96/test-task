@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import "./one-list.css"
+import {Divider} from "antd";
 
 class OneList extends Component {
 
@@ -16,18 +17,19 @@ class OneList extends Component {
         this.setState({onEdit: false})
     }
 
-    renderInput = (temperature) =>{
+    renderInput = (arg1, arg2) =>{
        return this.state.onEdit ? (<>
                 <td>
                     <input
-                        key={temperature.id}
-                        value={temperature.id}
+                        className="input-edit"
+                        value={arg1}
                         disabled={false}
                     />
                 </td>
                 <td>
                     <input
-                        value={temperature.degree}
+                        className="input-edit"
+                        value={arg2}
                         disabled={false}
                     />
                 </td>
@@ -38,32 +40,37 @@ class OneList extends Component {
             </>) : (<>
                <td>
                    <input
-                       key={temperature.id}
-                       value={temperature.id}
+                       className="input"
+                       value={arg1}
                        disabled={true}
                    />
                </td>
                <td>
                    <input
-                       value={temperature.degree}
+                       className="input"
+                       value={arg2}
                        disabled={true}
                    />
                </td>
                <td>
                    <button onClick={() => this.handleEdit()}>Edit</button>
+                   <button onClick={() => this.handleEdit()}>Delete</button>
                </td>
            </>);
     }
 
 
     render() {
-        const {data} = this.props;
+        const {arg1, arg2} = this.props;
+
         return (
-            <>
-                    <tr className="blocks">
-                        {this.renderInput(data)}
-                    </tr>
-            </>
+
+                    < >
+                        {this.renderInput(arg1, arg2)}
+                        <Divider/>
+                    </>
+
+
         )
     }
 }

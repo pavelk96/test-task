@@ -9,5 +9,17 @@
     justify-content: space-between;
 }
 
+.input{
+    border: none;
+}
 
+.input-edit{
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    background-color: rgb(240, 242, 245);
+}
 
+input:focus{
+    outline: none;
+}

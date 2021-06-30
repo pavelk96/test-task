@@ -23,7 +23,7 @@ class LeftMenu extends Component {
         return (
             <Sider collapsible collapsed={collapsed} onCollapse={this.onCollapse}>
                 <div className="logo" />
-                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
+                <Menu theme="dark" defaultSelectedKeys={['0']} mode="inline" >
                     <Menu.Item key="1" icon={<UserOutlined />}>
                         <Link to="/users-page">Users</Link>
                     </Menu.Item>

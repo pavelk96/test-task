@@ -1,6 +1,7 @@
 import React,{Component} from 'react';
 import {connect} from "react-redux";
 import {Divider} from "antd";
+import OneList from "../one-list";
 
 
 class UsersTabsContainer extends Component{
@@ -28,17 +29,18 @@ class UsersTabsContainer extends Component{
     render(){
         const {users} = this.props;
         return(
-            <table className="container" >
-                <thead>
-                <tr className="blocks">
+            <table className="container" align="center" border="0px">
+                <tbody>
+                <tr  className="blocks">
                     <th>ID</th>
                     <th>Login</th>
                     <th>Actions</th>
                 </tr>
-                <Divider/>
-                </thead>
-                <tbody >
-                {this.renderTab(users)}
+                {users.map((data, idx) => {return(
+                    <tr className="blocks">
+                        <OneList arg1={data.id} arg2={data.login} key={idx}/>
+                    </tr>
+                )})}
                 </tbody>
             </table>
         )
