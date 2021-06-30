@@ -1,10 +1,13 @@
 const initialState = {
     isAuthenticated: false,
-    temperatures: [{id: "test", degree: "temp"}, {id: "test2", degree: "temp2"}],
-    users: {
-        id: [],
-        login: []
-    }
+    temperatures: [
+        {id: "test", degree: "temp"},
+        {id: "test2", degree: "temp2"}
+    ],
+    users: [
+        {id:"1", login: "admin"},
+        {id:"2", login: "user"},
+    ]
 };
 
 const reducer = (state = initialState, action) => {

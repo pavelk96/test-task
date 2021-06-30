@@ -20,7 +20,6 @@ class App extends React.Component {
                     <Content className="content1">
                         <Route path="/temperatures-page" component={TemperaturePage}/>
                         <Route path="/users-page" component={UsersPage}/>
-                        1321
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
                 </Layout>
