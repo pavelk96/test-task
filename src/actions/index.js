@@ -5,4 +5,13 @@ const  deleteLine = (index, method) => {
     };
 };
 
-export {deleteLine};
+const saveLine = (index, method, data) => {
+    return {
+        type: 'SAVE_LINE',
+        payload: index,
+        method: method,
+        data: data
+    }
+}
+
+export {deleteLine, saveLine};

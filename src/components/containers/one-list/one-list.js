@@ -1,5 +1,5 @@
 import "./one-list.css"
-import {deleteLine} from "../../../actions";
+import {deleteLine, saveLine} from "../../../actions";
 import {Button} from "antd";
 import {
     EditOutlined,
@@ -15,19 +15,29 @@ class OneList extends Component {
 
 
     state = {
-        onEdit: false
-    }
+        onEdit: false,
+        data: ""
+    };
 
     handleEdit = () => {
         this.setState({onEdit: true})
-    }
+    };
 
     cancelEdit = () => {
         this.setState({onEdit: false})
-    }
+    };
 
     handleDel = (index, method) => {
         this.props.deleteLine(index, method)
+    };
+
+    handleSave = (index, method, data) => {
+        this.props.saveLine(index, method, data);
+        this.cancelEdit();
+    };
+
+    handleChange = (data) => {
+        this.setState({data:data})
     }
 
     renderInput = (arg1, arg2) =>{
@@ -39,20 +49,22 @@ class OneList extends Component {
            <td>
                <input
                    className={onEdit ? "input-edit" : "input"}
-                   value={arg1}
+                   placeholder={arg1}
                    disabled={!onEdit}
+                   onChange={(e) => {this.handleChange(e.target.value)}}
                />
            </td>
            <td>
                <input
                    className={onEdit ? "input-edit" : "input"}
-                   value={arg2}
+                   placeholder={arg2}
                    disabled={!onEdit}
+                   onChange={(e) => {this.handleChange(e.target.value)}}
                />
            </td>
            <td>
                {onEdit ? (<>
-                       <Button icon={<CheckOutlined />}/>
+                       <Button icon={<CheckOutlined />} onClick={() => this.handleSave(index, method, this.state.data)}/>
                        <Button icon={<CloseOutlined />} onClick={() => this.cancelEdit()}/>
                    </>) : (
                        <>
@@ -76,7 +88,8 @@ class OneList extends Component {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        deleteLine: (index, method) => dispatch(deleteLine(index, method))
+        deleteLine: (index, method) => dispatch(deleteLine(index, method)),
+        saveLine: (index, method, data) => dispatch(saveLine(index, method, data))
     }
 }
 

@@ -30,6 +30,18 @@ const reducer = (state = initialState, action) => {
             }
             return state;
 
+        case 'SAVE_LINE' :
+            console.log(action.data)
+             if (action.method === "temperatures" && action.data !== "") {
+                const newItem = state.temperatures[action.payload].degree = action.data;
+                return {...state, newItem}
+             } else if (action.method === "users" && action.data !== "") {
+                 const newItem = state.users[action.payload].login = action.data;
+                 return {...state, newItem}
+             } else {
+                 return state
+             }
+
         default:
             return state;
     }
