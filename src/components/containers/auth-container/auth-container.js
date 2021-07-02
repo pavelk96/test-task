@@ -34,17 +34,17 @@ class AuthContainer extends React.Component {
         this.setState({lastName: lastName})
     };
 
-    redirectRegistration = async () => {
+    handleRegistration = async () => {
         const {login, password, firstName, lastName} = this.state;
         await this.props.fetchRegistration(firstName, lastName, login, password);
     };
 
-    redirectLogin = async () => {
+    handleLoginForm = async () => {
         const {login, password} = this.state;
         await this.props.fetchLogin(login, password);
     }
 
-    handleRegistrationFormRender = () => {
+    visibleRegistrationForm = () => {
         this.setState({registrationForm:!this.state.registrationForm})
     }
 
@@ -57,8 +57,8 @@ class AuthContainer extends React.Component {
                         iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                         onChange={(e) => this.handlePassword(e.target.value)}
                     />
-                    <Button onClick={this.redirectLogin}>Login</Button>
-                    <Button onClick={this.handleRegistrationFormRender}>Registration</Button>
+                    <Button onClick={this.handleLoginForm}>Login</Button>
+                    <Button onClick={this.visibleRegistrationForm}>Registration</Button>
                 </div>
             </div>
         )
@@ -74,8 +74,8 @@ class AuthContainer extends React.Component {
                 iconRender={visible => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
                 onChange={(e) => this.handlePassword(e.target.value)}
             />
-            <Button onClick={this.handleRegistrationFormRender} icon={<ArrowLeftOutlined />}/>
-            <Button className="btn" onClick={this.redirectRegistration} icon={<ArrowRightOutlined />}>Registration</Button>
+            <Button onClick={this.visibleRegistrationForm} icon={<ArrowLeftOutlined />}/>
+            <Button className="btn" onClick={this.handleRegistration} icon={<ArrowRightOutlined />}>Registration</Button>
         </div>
     </div>
     )
