@@ -1,0 +1,14 @@
+.auth-container{
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.auth-container Button{
+    height: 35px;
+    margin: 0;
+}
+
+.auth-form{
+    width: 300px;
+}

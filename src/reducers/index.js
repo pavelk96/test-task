@@ -1,5 +1,6 @@
+
 const initialState = {
-    isAuthenticated: true,
+    isAuthenticated: false,
     temperatures: [
         {id: "test", degree: "temp"},
         {id: "test2", degree: "temp2"}
@@ -7,12 +8,68 @@ const initialState = {
     users: [
         {id:"1", login: "admin"},
         {id:"2", login: "user"},
-    ]
+    ],
+    isLoadingLogin: false,
+    error: ""
 };
+
 
 const reducer = (state = initialState, action) => {
 
     switch (action.type) {
+
+        case 'LOGOUT':
+            localStorage.removeItem("login")
+            return {
+                ...state,
+                isAuthenticated: false
+            }
+
+        case 'CHECK_LOGIN':
+            if (localStorage.getItem("login")){
+                return {
+                    ...state,
+                    isAuthenticated: true
+                }
+            }
+
+        case 'LOGIN_REQUEST':
+            return {
+                ...state,
+                isLoadingLogin: true
+            }
+
+        case 'LOGIN_SUCCESS' :
+            return {
+                ...state,
+                isLoadingLogin: false
+            }
+
+        case 'LOGIN_ERROR' :
+            return {
+                ...state,
+                error: action.payload,
+                isLoadingLogin: false
+            }
+
+        case 'REGISTRATION_REQUEST':
+            return {
+                ...state,
+                isLoadingLogin: true
+            }
+
+        case 'REGISTRATION_SUCCESS':
+            return {
+                ...state,
+                isLoadingLogin: false,
+                isAuthenticated: true
+            }
+        case 'REGISTRATION_ERROR':
+            return {
+                ...state,
+                error: action.payload,
+                isLoadingLogin: false
+            }
 
         case `DELETE_LINE`:
             if (action.method === "temperatures") {
@@ -31,7 +88,6 @@ const reducer = (state = initialState, action) => {
             return state;
 
         case 'SAVE_LINE' :
-            console.log(action.data)
              if (action.method === "temperatures" && action.data !== "") {
                 const newItem = state.temperatures[action.payload].degree = action.data;
                 return {...state, newItem}
