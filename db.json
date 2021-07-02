@@ -1,0 +1,39 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "",
+      "lastName": "",
+      "login": "roy",
+      "password": "india"
+    },
+    {
+      "firstName": "Kedov",
+      "lastName": "",
+      "login": "lony322",
+      "password": "123",
+      "id": 2
+    },
+    {
+      "firstName": "Sasha",
+      "lastName": "Popov",
+      "login": "pupov",
+      "password": "qwert",
+      "id": 3
+    },
+    {
+      "firstName": "v",
+      "lastName": "v",
+      "login": "v",
+      "password": "v",
+      "id": 4
+    },
+    {
+      "firstName": "",
+      "lastName": "",
+      "login": "",
+      "password": "",
+      "id": 5
+    }
+  ]
+}
