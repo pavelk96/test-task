@@ -4,6 +4,7 @@ import "./auth-container.css"
 import { EyeInvisibleOutlined, EyeTwoTone, ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {connect} from "react-redux";
 import {fetchLogin, fetchRegistration} from "../../../actions";
+import {Redirect} from "react-router-dom";
 
 
 
@@ -84,6 +85,7 @@ class AuthContainer extends React.Component {
 
         return (
             <>
+                {this.props.isAuthenticated ? <Redirect to="/"/> : null}
                 {this.state.registrationForm ? this.renderRegistrationForm : this.renderLoginForm}
             </>
         );
@@ -92,7 +94,8 @@ class AuthContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLoadingLogin: state.isLoadingLogin
+        isLoadingLogin: state.isLoadingLogin,
+        isAuthenticated: state.isAuthenticated
     }
 }
 

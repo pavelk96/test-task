@@ -42,7 +42,8 @@ const reducer = (state = initialState, action) => {
         case 'LOGIN_SUCCESS' :
             return {
                 ...state,
-                isLoadingLogin: false
+                isLoadingLogin: false,
+                isAuthenticated: true
             }
 
         case 'LOGIN_ERROR' :
@@ -88,12 +89,15 @@ const reducer = (state = initialState, action) => {
             return state;
 
         case 'SAVE_LINE' :
-             if (action.method === "temperatures" && action.data !== "") {
-                const newItem = state.temperatures[action.payload].degree = action.data;
-                return {...state, newItem}
-             } else if (action.method === "users" && action.data !== "") {
-                 const newItem = state.users[action.payload].login = action.data;
-                 return {...state, newItem}
+            const { data, method, index} = action.payload;
+             if (method === "temperatures" && data !== "") {
+                 const arr = state.temperatures;
+                 arr.splice(index, 1, {id: data.arg1, degree: data.arg2})
+                return {...state, temperatures: arr}
+             } else if (method === "users" && data.arg1 !== "" && data.arg2 !== "") {
+                 const arr = state.users;
+                 arr.splice(index, 1, {id: data.arg1, login: data.arg2})
+                 return {...state, users: arr}
              } else {
                  return state
              }

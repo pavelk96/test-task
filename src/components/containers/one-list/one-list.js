@@ -16,8 +16,12 @@ class OneList extends Component {
 
     state = {
         onEdit: false,
-        data: ""
+        data:{
+            arg1:this.props.arg1,
+            arg2:this.props.arg2
+        }
     };
+
 
     handleEdit = () => {
         this.setState({onEdit: true})
@@ -31,56 +35,53 @@ class OneList extends Component {
         this.props.deleteLine(index, method)
     };
 
-    handleSave = (index, method, data) => {
-        this.props.saveLine(index, method, data);
+    handleSave = () => {
+        const { index, method, saveLine } = this.props;
+        const { data } = this.state;
+        saveLine(index, method, data);
         this.cancelEdit();
     };
 
-    handleChange = (data) => {
-        this.setState({data:data})
+    handleChange = (e) => {
+        const {name, value} = e.target;
+        this.setState({data: {...this.state.data,[name]:value}})
     }
 
-    renderInput = (arg1, arg2) =>{
-        const {onEdit} = this.state;
-        const {index, method} = this.props;
-
-       return (
-           <>
-           <td>
-               <input
-                   className={onEdit ? "input-edit" : "input"}
-                   placeholder={arg1}
-                   disabled={!onEdit}
-                   onChange={(e) => {this.handleChange(e.target.value)}}
-               />
-           </td>
-           <td>
-               <input
-                   className={onEdit ? "input-edit" : "input"}
-                   placeholder={arg2}
-                   disabled={!onEdit}
-                   onChange={(e) => {this.handleChange(e.target.value)}}
-               />
-           </td>
-           <td>
-               {onEdit ? (<>
-                       <Button icon={<CheckOutlined />} onClick={() => this.handleSave(index, method, this.state.data)}/>
-                       <Button icon={<CloseOutlined />} onClick={() => this.cancelEdit()}/>
-                   </>) : (
-                       <>
-                       <Button icon={<EditOutlined />} onClick={() => this.handleEdit()}/>
-                       <Button icon={<DeleteOutlined />} onClick={() => this.handleDel(index, method)}/></>)}
-           </td>
-       </>
-       )
-    }
 
     render() {
-        const {arg1, arg2} = this.props;
-
+        console.log(this.state)
+        const { onEdit, data } = this.state;
+        const { arg1, arg2 } = data;
+        const { index, method } = this.props;
         return (
                     <>
-                        {this.renderInput(arg1, arg2)}
+                        <td>
+                            <input
+                                name="arg1"
+                                className={onEdit ? "input-edit" : "input"}
+                                value={arg1}
+                                disabled={!onEdit}
+                                onChange={this.handleChange}
+                            />
+                        </td>
+                        <td>
+                            <input
+                                name="arg2"
+                                className={onEdit ? "input-edit" : "input"}
+                                value={arg2}
+                                disabled={!onEdit}
+                                onChange={this.handleChange}
+                            />
+                        </td>
+                        <td>
+                            {onEdit ? (<>
+                                <Button icon={<CheckOutlined />} onClick={this.handleSave}/>
+                                <Button icon={<CloseOutlined />} onClick={this.cancelEdit}/>
+                            </>) : (
+                                <>
+                                    <Button icon={<EditOutlined />} onClick={this.handleEdit}/>
+                                    <Button icon={<DeleteOutlined />} onClick={() => this.handleDel(index, method)}/></>)}
+                        </td>
                     </>
         )
     }
