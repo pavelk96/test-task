@@ -51,13 +51,14 @@ class OneList extends Component {
 
     render() {
         const { onEdit } = this.state;
+        const { arg1, arg2} = this.props;
         return (
                     <>
                         <td>
                             <input
                                 name="arg1"
                                 className={onEdit ? "input-edit" : "input"}
-                                placeholder={this.props.arg1}
+                                placeholder={arg1}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
@@ -66,7 +67,7 @@ class OneList extends Component {
                             <input
                                 name="arg2"
                                 className={onEdit ? "input-edit" : "input"}
-                                placeholder={this.props.arg2}
+                                placeholder={arg2}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
