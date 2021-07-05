@@ -88,8 +88,10 @@ const reducer = (state = initialState, action) => {
         case `DELETE_LINE`:
             console.log(action.payload)
             if (action.payload.method === "temperatures") {
-                const newArr = state.temperatures.slice(0,action.payload.index)
-                    .concat(state.temperatures.slice(action.payload.index + 1));
+                const newArr = [
+                    ...state.temperatures.slice(0, action.payload.index),
+                    ...state.temperatures.slice(action.payload.index + 1)
+                ]
                 return {...state, temperatures: newArr}
             } else if (action.payload.method === "users") {
                 const newArr = [

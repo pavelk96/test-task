@@ -23,6 +23,7 @@ class OneList extends Component {
         }
     };
 
+
     handleEdit = () => {
         this.setState({onEdit: true})
     };
@@ -51,13 +52,14 @@ class OneList extends Component {
 
     render() {
         const { onEdit } = this.state;
+        const { arg1, arg2 } = this.props;
         return (
                     <>
                         <td>
                             <input
                                 name="arg1"
                                 className={onEdit ? "input-edit" : "input"}
-                                placeholder={this.props.arg1}
+                                value={arg1}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
@@ -66,7 +68,7 @@ class OneList extends Component {
                             <input
                                 name="arg2"
                                 className={onEdit ? "input-edit" : "input"}
-                                placeholder={this.props.arg2}
+                                value={arg2}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
@@ -80,6 +82,7 @@ class OneList extends Component {
                                     <Button icon={<EditOutlined />} onClick={this.handleEdit}/>
                                     <Button icon={<DeleteOutlined />} onClick={this.handleDel}/></>)}
                         </td>
+
                     </>
         )
     }
