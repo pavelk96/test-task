@@ -1,23 +1,25 @@
+import React from "react";
+import {Route, Redirect} from "react-router-dom";
+import {Layout} from 'antd';
+import {connect} from "react-redux";
+
 import LeftMenu from "../left-menu";
 import TemperaturePage from "../pages/temperatures-page";
 import UsersPage from "../pages/users-page";
 import AuthPage from "../pages/auth-page";
-import {Route, Redirect} from "react-router-dom";
-import React from "react";
-import {Layout} from 'antd';
-import {connect} from "react-redux";
 import {checkLogin} from "../../actions/index"
+
 const { Header, Content, Footer } = Layout;
+
 class App extends React.Component {
 
     componentDidMount() {
-        this.props.checkLogin()
+        const {checkLogin} = this.props;
+        checkLogin()
     }
 
     render() {
-
         const {isAuthenticated} = this.props;
-
         return (
                 <>
                     {isAuthenticated ? <>
@@ -40,10 +42,9 @@ class App extends React.Component {
                     </>
                     }
                 </>
-
-);
+        );
     }
-}
+};
 
 const mapStateToProps = (state) => {
     return {
@@ -55,6 +56,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         checkLogin: () => dispatch(checkLogin())
     }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

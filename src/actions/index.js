@@ -88,6 +88,7 @@ const fetchRegistration = (dispatch) => async (firstName, lastName, login, passw
             return res.json()
         })
         .catch((error) => dispatch(registrationError(error)))
+    localStorage.setItem("login", login)
 };
 
 const checkLogin = () => {

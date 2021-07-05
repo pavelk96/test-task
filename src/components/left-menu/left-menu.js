@@ -1,10 +1,12 @@
+import React from "react";
 import { Layout, Menu } from 'antd';
 import { UserOutlined, BarsOutlined, LogoutOutlined } from '@ant-design/icons';
 import {connect} from "react-redux";
-import React from "react";
 import {Component} from "react";
 import {Link} from "react-router-dom";
+
 import {logout} from "../../actions";
+
 const { Sider } = Layout;
 
 class LeftMenu extends Component {
