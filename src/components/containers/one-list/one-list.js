@@ -1,14 +1,15 @@
-import "./one-list.css"
-import {deleteLine, saveLine} from "../../../actions";
+import React,{Component} from 'react';
 import {Button} from "antd";
+import {connect} from "react-redux";
 import {
     EditOutlined,
     DeleteOutlined,
     CheckOutlined,
     CloseOutlined
 } from '@ant-design/icons';
-import {connect} from "react-redux";
-import React,{Component} from 'react';
+
+import "./one-list.css"
+import {deleteLine, saveLine} from "../../../actions";
 
 
 class OneList extends Component {
@@ -22,7 +23,6 @@ class OneList extends Component {
         }
     };
 
-
     handleEdit = () => {
         this.setState({onEdit: true})
     };
@@ -31,8 +31,9 @@ class OneList extends Component {
         this.setState({onEdit: false})
     };
 
-    handleDel = (index, method) => {
-        this.props.deleteLine(index, method)
+    handleDel = () => {
+        const { index, method, deleteLine } = this.props;
+        deleteLine(index, method);
     };
 
     handleSave = () => {
@@ -45,21 +46,18 @@ class OneList extends Component {
     handleChange = (e) => {
         const {name, value} = e.target;
         this.setState({data: {...this.state.data,[name]:value}})
-    }
+    };
 
 
     render() {
-        console.log(this.state)
-        const { onEdit, data } = this.state;
-        const { arg1, arg2 } = data;
-        const { index, method } = this.props;
+        const { onEdit } = this.state;
         return (
                     <>
                         <td>
                             <input
                                 name="arg1"
                                 className={onEdit ? "input-edit" : "input"}
-                                value={arg1}
+                                placeholder={this.props.arg1}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
@@ -68,7 +66,7 @@ class OneList extends Component {
                             <input
                                 name="arg2"
                                 className={onEdit ? "input-edit" : "input"}
-                                value={arg2}
+                                placeholder={this.props.arg2}
                                 disabled={!onEdit}
                                 onChange={this.handleChange}
                             />
@@ -80,7 +78,7 @@ class OneList extends Component {
                             </>) : (
                                 <>
                                     <Button icon={<EditOutlined />} onClick={this.handleEdit}/>
-                                    <Button icon={<DeleteOutlined />} onClick={() => this.handleDel(index, method)}/></>)}
+                                    <Button icon={<DeleteOutlined />} onClick={this.handleDel}/></>)}
                         </td>
                     </>
         )
@@ -92,6 +90,6 @@ const mapDispatchToProps = (dispatch) => {
         deleteLine: (index, method) => dispatch(deleteLine(index, method)),
         saveLine: (index, method, data) => dispatch(saveLine(index, method, data))
     }
-}
+};
 
 export default connect(null, mapDispatchToProps)(OneList);

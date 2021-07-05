@@ -1,13 +1,12 @@
 import React from "react";
+import { withRouter } from "react-router";
 import {Button, Input,} from "antd"
-import "./auth-container.css"
 import { EyeInvisibleOutlined, EyeTwoTone, ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {connect} from "react-redux";
-import {fetchLogin, fetchRegistration} from "../../../actions";
 import {Redirect} from "react-router-dom";
+import "./auth-container.css"
 
-
-
+import {fetchLogin, fetchRegistration} from "../../../actions";
 
 class AuthContainer extends React.Component {
     state = {
@@ -17,7 +16,6 @@ class AuthContainer extends React.Component {
         lastName:"",
         registrationForm: false
     }
-
 
     handleLogin = (login) => {
         this.setState({login: login})
@@ -35,19 +33,24 @@ class AuthContainer extends React.Component {
         this.setState({lastName: lastName})
     };
 
-    handleRegistration = async () => {
+    handleRegistration =  () => {
         const {login, password, firstName, lastName} = this.state;
-        await this.props.fetchRegistration(firstName, lastName, login, password);
+        const { fetchRegistration } = this.props;
+        if (login !== "" && password !== "" && lastName !== "" && firstName !== "")
+        fetchRegistration(firstName, lastName, login, password);
     };
 
-    handleLoginForm = async () => {
+    handleLoginForm = () => {
+        const { fetchLogin } = this.props;
         const {login, password} = this.state;
-        await this.props.fetchLogin(login, password);
-    }
+        if (login !== "" && password !== "") {
+            fetchLogin(login, password);
+        }
+    };
 
     visibleRegistrationForm = () => {
         this.setState({registrationForm:!this.state.registrationForm})
-    }
+    };
 
     renderLoginForm = (
             <div className="auth-container">
@@ -62,7 +65,7 @@ class AuthContainer extends React.Component {
                     <Button onClick={this.visibleRegistrationForm}>Registration</Button>
                 </div>
             </div>
-        )
+        );
 
     renderRegistrationForm = (
         <div className="auth-container">
@@ -79,7 +82,7 @@ class AuthContainer extends React.Component {
             <Button className="btn" onClick={this.handleRegistration} icon={<ArrowRightOutlined />}>Registration</Button>
         </div>
     </div>
-    )
+    );
 
     render() {
 
@@ -88,7 +91,7 @@ class AuthContainer extends React.Component {
                 {this.props.isAuthenticated ? <Redirect to="/"/> : null}
                 {this.state.registrationForm ? this.renderRegistrationForm : this.renderLoginForm}
             </>
-        );
+        )
     }
 }
 
@@ -97,13 +100,13 @@ const mapStateToProps = (state) => {
         isLoadingLogin: state.isLoadingLogin,
         isAuthenticated: state.isAuthenticated
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return{
         fetchLogin: fetchLogin(dispatch),
         fetchRegistration: fetchRegistration(dispatch)
     }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(AuthContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthContainer));

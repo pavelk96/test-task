@@ -2,12 +2,24 @@
 const initialState = {
     isAuthenticated: false,
     temperatures: [
-        {id: "test", degree: "temp"},
-        {id: "test2", degree: "temp2"}
+        {id: "312", degree: "22"},
+        {id: "424", degree: "34"},
+        {id: "122", degree: "112"},
+        {id: "421", degree: "69"},
+        {id: "666", degree: "54"},
+        {id: "442", degree: "35"},
+        {id: "111", degree: "31"},
+        {id: "776", degree: "65"},
+
     ],
     users: [
         {id:"1", login: "admin"},
         {id:"2", login: "user"},
+        {id:"3", login: "user"},
+        {id:"4", login: "user"},
+        {id:"6", login: "user"},
+        {id:"7", login: "user"},
+        {id:"8", login: "user"}
     ],
     isLoadingLogin: false,
     error: ""
@@ -32,6 +44,7 @@ const reducer = (state = initialState, action) => {
                     isAuthenticated: true
                 }
             }
+            return state
 
         case 'LOGIN_REQUEST':
             return {
@@ -73,16 +86,15 @@ const reducer = (state = initialState, action) => {
             }
 
         case `DELETE_LINE`:
-            if (action.method === "temperatures") {
-                const newArr = [
-                    ...state.temperatures.slice(0, action.payload),
-                    ...state.temperatures.slice(action.payload + 1)
-                ]
+            console.log(action.payload)
+            if (action.payload.method === "temperatures") {
+                const newArr = state.temperatures.slice(0,action.payload.index)
+                    .concat(state.temperatures.slice(action.payload.index + 1));
                 return {...state, temperatures: newArr}
-            } else if (action.method === "users") {
+            } else if (action.payload.method === "users") {
                 const newArr = [
-                    ...state.users.slice(0, action.payload),
-                    ...state.users.slice(action.payload + 1)
+                    ...state.users.slice(0, action.payload.index),
+                    ...state.users.slice(action.payload.index + 1)
                 ]
                 return {...state, users: newArr}
             }
