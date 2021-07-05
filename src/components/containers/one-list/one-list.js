@@ -36,7 +36,7 @@ class OneList extends Component {
         const { index, method, saveLine } = this.props;
         const { data } = this.state;
         saveLine(index, method, data);
-        this.cancelEdit();
+        this.handleEdit();
     };
 
     handleChange = (e) => {
