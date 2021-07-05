@@ -11,7 +11,6 @@ class TemperatureTabsContainer extends Component{
 
     render(){
         const {temperatures} = this.props;
-        console.log(temperatures)
 
         return(
             <table className="container" align="center" border="0px">

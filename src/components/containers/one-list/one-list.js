@@ -24,11 +24,7 @@ class OneList extends Component {
     };
 
     handleEdit = () => {
-        this.setState({onEdit: true})
-    };
-
-    cancelEdit = () => {
-        this.setState({onEdit: false})
+        this.setState({onEdit: !this.state.onEdit})
     };
 
     handleDel = () => {
@@ -75,7 +71,7 @@ class OneList extends Component {
                         <td>
                             {onEdit ? (<>
                                 <Button icon={<CheckOutlined />} onClick={this.handleSave}/>
-                                <Button icon={<CloseOutlined />} onClick={this.cancelEdit}/>
+                                <Button icon={<CloseOutlined />} onClick={this.handleEdit}/>
                             </>) : (
                                 <>
                                     <Button icon={<EditOutlined />} onClick={this.handleEdit}/>
