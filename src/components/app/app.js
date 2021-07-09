@@ -8,6 +8,8 @@ import TemperaturePage from "../pages/temperatures-page";
 import UsersPage from "../pages/users-page";
 import AuthPage from "../pages/auth-page";
 import {checkLogin} from "../../actions/index"
+import {withRouter} from "react-router";
+
 
 const { Header, Content, Footer } = Layout;
 
@@ -17,6 +19,8 @@ class App extends React.Component {
         const {checkLogin} = this.props;
         checkLogin()
     }
+
+
 
     render() {
         const {isAuthenticated} = this.props;
@@ -29,7 +33,7 @@ class App extends React.Component {
                                 <Header className="site-layout-background" style={{ padding: 0 }} >
                                 </Header>
                                 <Content className="content1">
-                                    <Route exact path="/login" render={() => isAuthenticated && (<Redirect to="/" />)} />
+                                    <Route exact path="/login" history={this.props.history} render={() => isAuthenticated && (<Redirect to="/" />)} />
                                     <Route exact path="/temperatures-page" component={TemperaturePage}/>
                                     <Route exact path="/users-page" component={UsersPage}/>
                                 </Content>
@@ -58,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

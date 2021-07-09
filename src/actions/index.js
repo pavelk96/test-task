@@ -44,9 +44,16 @@ const fetchLogin = (dispatch) => async (login, password) =>  {
             return res.json()
         })
         .catch((error) => dispatch(loginError(error)))
-    if (response[0].password === password){
-        localStorage.setItem("login", login)
+    if (response.length > 0){
+        if (response[0].password === password){
+            localStorage.setItem("login", login)
+        } else {
+            console.log("Неверный пароль")
+        }
+    } else {
+        console.log('Такого пользователя нет')
     }
+
 };
 
 const registrationRequest = () => {

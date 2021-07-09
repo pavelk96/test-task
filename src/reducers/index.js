@@ -55,8 +55,7 @@ const reducer = (state = initialState, action) => {
         case 'LOGIN_SUCCESS' :
             return {
                 ...state,
-                isLoadingLogin: false,
-                isAuthenticated: true
+                isLoadingLogin: false
             }
 
         case 'LOGIN_ERROR' :

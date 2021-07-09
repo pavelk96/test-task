@@ -1,6 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router";
-import {Button, Input,} from "antd"
+import {Button, Input} from "antd"
 import { EyeInvisibleOutlined, EyeTwoTone, ArrowLeftOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import {connect} from "react-redux";
 import {Redirect} from "react-router-dom";
@@ -45,6 +45,8 @@ class AuthContainer extends React.Component {
         const {login, password} = this.state;
         if (login !== "" && password !== "") {
             fetchLogin(login, password);
+            this.props.history.push("/");
+            window.location.reload()
         }
     };
 
